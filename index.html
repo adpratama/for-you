@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="id" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>For You</title>
+    <meta name="robots" content="noindex,nofollow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="For You" />
+    <meta
+      property="og:description"
+      content="Sedikit sesuatu yang dibuat khusus untukmu."
+    />
+    <meta
+      property="og:image"
+      content="https://adpratama.github.io/for-you/assets/images/share-preview.jpg"
+    />
+    <meta property="og:url" content="https://adpratama.github.io/for-you/" />
+    <meta property="og:site_name" content="For You" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="For You" />
+    <meta
+      name="twitter:description"
+      content="Sedikit sesuatu yang dibuat khusus untukmu."
+    />
+    <meta
+      name="twitter:image"
+      content="https://adpratama.github.io/for-you/assets/images/share-preview.jpg"
+    />
+    <!-- 
+  FONT NOTE:
+  "Cormorant Garant" dan "Cormorant Garamond" adalah dua family berbeda di Google Fonts.
+  Yang dipakai di sini adalah Cormorant Garant (lebih lightweight, ideal untuk display).
+  Jika ingin switch ke Garamond, ganti URL dan nama font di CSS.
+-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- STAGE 1 — PRIVATE ACCESS -->
+    <section
+      id="stage-access"
+      class="stage"
+      aria-label="Private Access"
+      role="main"
+      aria-hidden="true"
+    >
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="stage-inner">
+        <div class="status-badge fade-in">
+          <div class="status-dot" aria-hidden="true"></div>
+          <span>Private</span>
+        </div>
+        <div class="divider" aria-hidden="true"></div>
+        <h1 class="headline fade-in-up delay-200">For<br /><em>You</em></h1>
+        <p class="body-text mt-8 fade-in-up delay-300">
+          Pengalaman ini dibuat<br />untuk satu orang saja.
+        </p>
+        <div class="mt-12 fade-in-up delay-400">
+          <button id="btn-enter" class="btn-primary">Masuk</button>
+        </div>
+        <p class="muted mt-6 fade-in delay-600">Kamu tahu ini untukmu.</p>
+      </div>
+    </section>
+
+    <!-- STAGE 2 — IDENTITY CHECK -->
+    <section
+      id="stage-identity"
+      class="stage"
+      aria-label="Verifikasi Identitas"
+      aria-hidden="true"
+    >
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="stage-inner">
+        <span class="label">Verifikasi Identitas</span>
+        <h2 class="subhead mt-4">Siapa kamu?</h2>
+        <p class="body-text mt-4">
+          Sistem perlu memastikan<br />kamu adalah orang yang tepat.
+        </p>
+        <div class="mt-8" id="identity-input-wrap">
+          <input
+            id="identity-input"
+            type="text"
+            class="input-field"
+            placeholder="Ketik namamu..."
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            maxlength="50"
+            aria-label="Masukkan nama"
+          />
+        </div>
+        <p id="identity-feedback" class="feedback mt-4" aria-live="polite"></p>
+        <div class="mt-6">
+          <button id="btn-verify" class="btn-primary">Verifikasi</button>
+        </div>
+        <div id="identity-result" class="mt-6" aria-live="polite"></div>
+        <div class="mt-6">
+          <button
+            id="btn-identity-next"
+            class="btn-primary"
+            style="display: none"
+          >
+            Lanjutkan →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 3 — LOVE ANALYSIS -->
+    <section
+      id="stage-analysis"
+      class="stage"
+      aria-label="Analisis"
+      aria-hidden="true"
+    >
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="stage-inner">
+        <div class="scan-header">
+          <span class="label">Sistem Analisis</span>
+          <h2 class="subhead mt-2">Menganalisis subjek...</h2>
+        </div>
+        <div id="scan-rows" role="list" aria-label="Hasil analisis"></div>
+        <div
+          id="analysis-result"
+          class="analysis-result"
+          aria-live="polite"
+        ></div>
+        <div class="mt-8">
+          <button
+            id="btn-analysis-next"
+            class="btn-primary"
+            style="display: none"
+          >
+            Lanjutkan →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 4 — WIFE SUPPORT CENTER -->
+    <section
+      id="stage-prank"
+      class="stage"
+      aria-label="Wife Support Center"
+      aria-hidden="true"
+    >
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="stage-inner">
+        <div class="support-header" aria-hidden="true">
+          <div class="support-dot dot-red"></div>
+          <div class="support-dot dot-yellow"></div>
+          <div class="support-dot dot-green"></div>
+          <span class="support-title-bar">Wife Support Center — v1.0.0</span>
+        </div>
+        <div class="support-body" id="support-body"></div>
+      </div>
+    </section>
+
+    <!-- STAGE 5 — TRANSITION -->
+    <section
+      id="stage-transition"
+      class="stage"
+      aria-label="Transisi"
+      aria-hidden="true"
+    >
+      <div class="stage-inner">
+        <div id="transition-lines" role="region" aria-label="Pesan"></div>
+        <div class="mt-12">
+          <button
+            id="btn-transition-next"
+            class="btn-primary"
+            style="display: none"
+          >
+            Aku siap →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 6 — A LITTLE SOMETHING FOR YOU -->
+    <section
+      id="stage-photos"
+      class="stage"
+      aria-label="Sesuatu Untukmu"
+      aria-hidden="true"
+    >
+      <div class="orb-warm orb-warm-a" aria-hidden="true"></div>
+      <div class="orb-warm orb-warm-b" aria-hidden="true"></div>
+
+      <div class="photos-outer">
+        <!-- Header -->
+        <header class="photos-header">
+          <span class="photos-label">Untuk Kamu</span>
+          <h2 class="photos-headline">
+            Sedikit<br /><em>kenangan</em><br />dari aku.
+          </h2>
+        </header>
+
+        <!-- Masonry gallery — built by JS from DATA.photos -->
+        <div
+          id="photo-gallery"
+          class="photo-masonry"
+          role="list"
+          aria-label="Foto-foto kita"
+        ></div>
+
+        <!-- Footer CTA -->
+        <footer class="photos-footer">
+          <button id="btn-photos-next" class="btn-primary">
+            Ada yang ingin aku berikan →
+          </button>
+        </footer>
+      </div>
+
+      <div class="scroll-nudge" aria-hidden="true">
+        <span class="scroll-nudge-label">Scroll</span>
+        <div class="scroll-nudge-line"></div>
+      </div>
+    </section>
+
+    <!-- STAGE 7 — OPEN WHEN -->
+    <section
+      id="stage-gifts"
+      class="stage"
+      aria-label="Open When"
+      aria-hidden="true"
+    >
+      <div class="orb-warm orb-warm-a" aria-hidden="true"></div>
+      <div class="orb-warm orb-warm-b" aria-hidden="true"></div>
+
+      <div class="ow-outer">
+        <!-- Header -->
+        <header class="ow-header" id="ow-header">
+          <span class="ow-label">Untuk Kamu</span>
+          <h2 class="ow-headline">Buka saat<br /><em>kamu perlu.</em></h2>
+          <p class="ow-sub">Pilih yang paling<br />kamu butuhkan sekarang.</p>
+        </header>
+
+        <!-- Open When cards — built by JS from DATA.openWhen -->
+        <div
+          id="ow-grid"
+          class="ow-grid"
+          role="list"
+          aria-label="Open When letters"
+        ></div>
+
+        <!-- Footer CTA -->
+        <footer class="ow-footer" id="ow-footer">
+          <button id="btn-gifts-next" class="btn-primary">
+            Ada satu hal lagi →
+          </button>
+        </footer>
+      </div>
+    </section>
+
+    <!-- Open When message overlay -->
+    <div
+      id="ow-reveal"
+      class="ow-reveal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Pesan untukmu"
+      aria-hidden="true"
+    >
+      <div class="ow-reveal-inner">
+        <p id="ow-reveal-condition" class="ow-reveal-condition"></p>
+        <div id="ow-reveal-body" class="ow-reveal-body"></div>
+        <button id="ow-reveal-close" class="ow-reveal-close">Tutup ❤️</button>
+      </div>
+    </div>
+
+    <!-- STAGE 8 — LOVE LETTER -->
+    <section
+      id="stage-letter"
+      class="stage"
+      aria-label="Surat"
+      aria-hidden="true"
+    >
+      <div class="orb-warm orb-warm-a" aria-hidden="true"></div>
+      <div class="orb-warm orb-warm-b" aria-hidden="true"></div>
+
+      <!-- Prelude lines — injected by JS -->
+      <div id="letter-prelude" class="letter-prelude" aria-live="polite"></div>
+
+      <!-- Envelope — shown after prelude -->
+      <div
+        id="letter-envelope-wrap"
+        class="letter-envelope-wrap"
+        aria-hidden="true"
+      >
+        <button
+          id="letter-envelope-btn"
+          class="letter-envelope"
+          type="button"
+          aria-label="Buka surat"
+        >
+          <div class="env-body" aria-hidden="true"></div>
+          <div class="env-flap" aria-hidden="true"></div>
+          <div class="env-fold-left" aria-hidden="true"></div>
+          <div class="env-fold-right" aria-hidden="true"></div>
+          <div class="env-glow" aria-hidden="true"></div>
+        </button>
+        <button id="btn-open-letter" class="btn-open-letter" type="button">
+          Buka surat
+        </button>
+      </div>
+
+      <!-- Letter scroll layer — shown after envelope opened -->
+      <div
+        id="letter-scroll"
+        class="letter-scroll-stage"
+        role="region"
+        aria-label="Isi surat"
+      >
+        <article class="letter-paper">
+          <span id="letter-date" class="letter-date"></span>
+          <p id="letter-salutation" class="letter-salutation"></p>
+          <div id="letter-body" class="letter-body"></div>
+          <div class="letter-closing">
+            <p id="letter-closing-text" class="letter-closing-text"></p>
+            <span id="letter-signature" class="letter-signature"></span>
+          </div>
+        </article>
+
+        <!-- Audio — optional, user-initiated -->
+        <!-- <div id="letter-audio-wrap" class="letter-audio-wrap" aria-hidden="true">
+          <button id="btn-letter-audio" class="btn-audio" type="button" aria-label="Dengarkan aku">
+            <span class="btn-audio-icon" aria-hidden="true">▶</span>
+            <span id="btn-audio-label">Dengarkan aku</span>
+          </button>
+          <p class="letter-audio-hint">suara aslinya</p>
+        </div> -->
+
+        <!-- CTA to Stage 9 -->
+        <div id="letter-cta" class="letter-cta-wrap" aria-hidden="true">
+          <div
+            class="warm-divider"
+            aria-hidden="true"
+            style="margin: 0 auto 1.75rem"
+          ></div>
+          <button id="btn-letter-next" class="btn-primary" type="button">
+            Masih ada satu hal lagi →
+          </button>
+        </div>
+
+        <audio id="letter-audio-el" preload="none" aria-hidden="true"></audio>
+      </div>
+    </section>
+
+    <!-- STAGE 9 — FINAL REVEAL -->
+    <section
+      id="stage-final"
+      class="stage"
+      aria-label="Akhir"
+      aria-hidden="true"
+    >
+      <div class="orb-warm orb-warm-a" aria-hidden="true"></div>
+      <div class="orb-warm orb-warm-b" aria-hidden="true"></div>
+
+      <div class="final-inner" id="final-inner" aria-live="polite">
+        <!-- Beat lines and content injected by JS -->
+      </div>
+    </section>
+
+    <!-- EASTER EGG -->
+    <div
+      id="easter-egg"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Secret"
+      aria-hidden="true"
+    >
+      <div>
+        <span class="label" style="color: var(--accent-warm)"
+          >Secret Mode Unlocked</span
+        >
+        <h2 class="headline mt-6" style="font-size: var(--text-3xl)">
+          Kamu menemukan<br />yang tidak seharusnya<br />kamu temukan. 😌
+        </h2>
+        <p class="body-text mt-6">
+          Tidak ada yang tersembunyi di sini.<br />Kecuali fakta bahwa
+          suamimu<br />menghabiskan waktu terlalu banyak<br />untuk membuat
+          website ini.
+        </p>
+        <p class="muted mt-6" style="font-size: var(--text-xs)">
+          (Tap / tekan Escape untuk tutup)
+        </p>
+      </div>
+    </div>
+
+    <!-- FOOTER — invisible, present for easter egg long-press -->
+    <footer id="footer-credit" aria-hidden="true">
+      <p
+        style="
+          font-size: 0.65rem;
+          color: var(--text-muted);
+          letter-spacing: 0.05em;
+        "
+      >
+        Made with ❤️<br />dari suamimu yang mencintaimu.
+      </p>
+    </footer>
+
+    <!-- Final music — triggered by Stage 8 interaction only -->
+    <audio id="finalMusic" preload="auto" aria-hidden="true">
+      <source src="assets/audio/happy-birthday.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
