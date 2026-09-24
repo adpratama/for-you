@@ -87,12 +87,12 @@ const DATA = {
   // Tambahkan path foto di sini. Letakkan file di assets/images/.
   // Null atau path tidak valid akan dilewati otomatis.
   photos: [
-    "assets/images/memory-01.jpg",
-    "assets/images/memory-02.jpg",
-    "assets/images/memory-03.jpg",
-    "assets/images/memory-04.jpg",
-    "assets/images/memory-05.jpg",
-    "assets/images/memory-06.jpg",
+    "assets/images/memory-01.JPG",
+    "assets/images/memory-02.JPG",
+    "assets/images/memory-03.JPG",
+    "assets/images/memory-04.JPG",
+    "assets/images/memory-05.JPG",
+    "assets/images/memory-06.JPG",
   ],
 
   // ── STAGE 7: OPEN WHEN ────────────────────────────────────
